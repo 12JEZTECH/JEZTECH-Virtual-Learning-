@@ -1,0 +1,30 @@
+name: Restore and validate v19
+on:
+  push:
+    branches: [v20-restoration]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python tools/extract-v19.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: restored-v19-source
+          path: restored-v19/
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install and validate
+        working-directory: restored-v19/JEZTECH_Learning_Source
+        run: |
+          corepack enable
+          pnpm install --frozen-lockfile
+          pnpm exec tsc --noEmit
+          pnpm build
