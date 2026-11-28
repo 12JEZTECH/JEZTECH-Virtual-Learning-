@@ -1450,3 +1450,14 @@ test('gallery search finds a learner beyond the first page while keeping the tea
  const filtered=findGalleryMembers(members,'t','  learner 599  ');assert.deepEqual(filtered.map(m=>m.id),['t','s599']);assert.equal(galleryPage(filtered,'t',583).others[0].id,'s599');assert.equal(galleryPage(filtered,'t',583).offset,0);
  assert.deepEqual(findGalleryMembers(members,'t','','s400').map(m=>m.id),['t','s400']);assert.equal(findGalleryMembers(members,'t','unknown').length,1);assert.equal(galleryPage([],null,100).others.length,0);
 });
+
+fs.writeFileSync('.sites-runtime/clip-links-test.mjs',ts.transpileModule(fs.readFileSync('app/clips/link.ts','utf8'),{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ESNext}}).outputText);
+const {clipLinkPath,clipDashboard}=await import('../.sites-runtime/clip-links-test.mjs');
+test('clip links contain only stable IDs and open the correct portal without playback credentials',()=>{
+ assert.equal(clipLinkPath('clip-123'),'/clips/clip-123');for(const role of ['student','teacher','admin'])assert.equal(clipDashboard(role,'clip-123'),'/'+role+'?section=videos&clip=clip-123');assert.equal(clipDashboard('student'),'/student?section=videos');for(const id of ['../admin','https://evil.example','x?lease=secret',''])assert.throws(()=>clipLinkPath(id));
+});
+test('every uploaded clip has an exportable link while teacher libraries remain isolated',async()=>{
+ await admit();await subscribe();const insert=db.sqlite.prepare("INSERT INTO learning_videos(id,teacher_id,title,url,created_at) VALUES(?,?,?,'r2:protected.webm',?)");for(let i=0;i<125;i++)insert.run('clip-'+i,teacher.id,'Tutorial '+i,NOW+i);insert.run('private-other',other.id,'Other teacher clip',NOW);
+ const visible=await readEngagement(db,teacher,NOW+1),learner=await readEngagement(db,student,NOW+1);assert.equal(visible.learningVideos.length,125);assert.equal(learner.learningVideos.length,125);assert.equal(new Set(visible.learningVideos.map(c=>clipLinkPath(c.id))).size,125);assert.ok(!JSON.stringify(visible.learningVideos).includes('r2:'));assert.ok(!learner.learningVideos.some(c=>c.id==='private-other'));
+ assert.equal(db.sqlite.prepare('SELECT COUNT(*) n FROM clip_permits').get().n,0);assert.equal(db.sqlite.prepare('SELECT used FROM video_credits WHERE student_id=?').get(student.id).used,0);
+});

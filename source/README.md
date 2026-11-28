@@ -226,3 +226,7 @@ The 33 Grade 12 official-design imports already marked download-disabled-by-owne
 ### Live learner board and tutorial sharing
 
 Teachers now have a paged board of every online learner, a searchable server-media camera gallery and direct learner selection. Teachers and learners can hide/show their own video during a call, including enabling a camera after joining a small peer class. Tutorial sharing includes **Share & present tutorial**, a paused teacher player and a prominent learner **Join teacher's tutorial** action. See `docs/live-learner-board-and-tutorials.md` for the workflow and access rules.
+
+### Protected clip links
+
+Every uploaded clip in the Learning video studio now has a permanent `/clips/<id>` link. The authenticated `/clips` entry opens the signed-in user's video library. Use **Copy all clip links** or **Download link list** to export the entire accessible library. Links never expose R2 keys or playback leases, and opening one does not reserve video credit; learners explicitly choose Watch linked clip. Existing admission, teaching-group, entitlement and playback checks remain in force.

@@ -1,6 +1,6 @@
 # JEZTECH Virtual Learning
 
-The latest published application source (Site version 70) is in `source/`. The older v19 ZIP is retained for reference. `SOURCE_VERSION.json` identifies the original source commit.
+The latest published application source (Site version 69) is in `source/`. The older v19 ZIP is retained for reference. `SOURCE_VERSION.json` identifies the original source commit.
 
 Live platform: https://jeztech-learning.jezreelch.chatgpt.site
 
@@ -14,6 +14,10 @@ The existing Render service points to the separate `12JEZTECH/jeztech-unified-sy
 
 ## Verification
 
-The published version passed 286 tests, TypeScript checking and a production build before its original publication. This export preserves the tracked source files without runtime secrets, learner records, or payment data.
+The published version passed 282 tests, TypeScript checking and a production build before its original publication. This export preserves the tracked source files without runtime secrets, learner records, or payment data.
 
 See `source/README.md` for application features and development guidance.
+
+## Render entry address
+
+The free static Render entry is https://jeztech-learning-portal.onrender.com . It opens the existing JEZTECH Site and keeps its login and data. `/clips/` opens the authenticated clip library. Every uploaded clip in the library has a protected link; copy or download all accessible links from Learning videos.
