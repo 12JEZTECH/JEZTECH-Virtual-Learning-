@@ -743,7 +743,7 @@ for(const [src,out,replacements] of [
  ['app/live/hls-service.ts','hls',[["'../service'","'./service-test.mjs'"]]],
 ]){let code=ts.transpileModule(fs.readFileSync(src,'utf8'),{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ESNext}}).outputText;for(const [a,b] of replacements)code=code.replaceAll(a,b);fs.writeFileSync('.sites-runtime/'+out+'-test.mjs',code)}
 const {watchCamera}=await import('../.sites-runtime/camera-state-test.mjs');
-const {galleryOfferer,galleryPage}=await import('../.sites-runtime/gallery-policy-test.mjs');
+const {galleryOfferer,galleryPage,findGalleryMembers}=await import('../.sites-runtime/gallery-policy-test.mjs');
 const {conferenceState,mutateConference}=await import('../.sites-runtime/conference-media-test.mjs');
 const {studentSubjects,setStudentSubject}=await import('../.sites-runtime/subjects-test.mjs');
 const {hlsPath,rewritePlaylist,beginHls,uploadHls,finishHls,removeHlsDraft}=await import('../.sites-runtime/hls-test.mjs');
@@ -1424,4 +1424,29 @@ test('School attendance rejects expired, exempt, other-class and unregistered le
  assert.equal((await db.prepare('SELECT COUNT(*) AS n FROM class_rolls').first()).n,0);
  await db.prepare("UPDATE admissions SET level='Grade 8' WHERE student_id=?").bind(student.id).run();
  await reject(markSchoolAttendance(db,teacher,{classId:id,students:[student.id],confirmed:true},NOW+14),403);
+});
+
+test('share and present creates one paused class tutorial and preserves learner choice and credits',async()=>{
+ const f=await cascadeFixture(),clip=await shareFixture(f,90),a={action:'cascadeClip',classId:f.classId,sessionId:f.session.id,clipId:clip.clip_id,durationSeconds:90,displayOrder:2,present:true};
+ const credit=db.sqlite.prepare('SELECT used FROM video_credits WHERE student_id=?').get(student.id).used;
+ const first=await mutateLive(db,teacher,a,f.at+1),again=await mutateLive(db,teacher,a,f.at+2);assert.equal(first.id,clip.id);assert.equal(again.id,clip.id);
+ const state=await liveSnapshot(db,student,f.classId,f.at+3);assert.equal(state.presentation.cascade_id,clip.id);assert.equal(state.presentation.position,0);assert.equal(state.presentation.playing,0);assert.equal(state.presentation.following,1);assert.equal(state.cascadedClips.length,1);
+ assert.equal(db.sqlite.prepare('SELECT used FROM video_credits WHERE student_id=?').get(student.id).used,credit);assert.equal(db.sqlite.prepare('SELECT COUNT(*) n FROM clip_permits WHERE user_id=?').get(student.id).n,0);
+});
+test('share and present rejects learners, other teachers and an absent presenting teacher before writing',async()=>{
+ const f=await cascadeFixture(),clip=await shareFixture(f,90),a={action:'cascadeClip',classId:f.classId,sessionId:f.session.id,clipId:clip.clip_id,durationSeconds:90,displayOrder:4,present:true};
+ await reject(mutateLive(db,student,a,f.at+1),403);await reject(mutateLive(db,other,a,f.at+1),403);
+ db.sqlite.prepare('UPDATE class_sessions SET teacher_present_id=NULL WHERE id=?').run(f.session.id);await reject(mutateLive(db,teacher,a,f.at+2),403);
+ assert.equal(db.sqlite.prepare('SELECT COUNT(*) n FROM clip_presentations').get().n,0);assert.equal(db.sqlite.prepare('SELECT display_order FROM cascaded_clips WHERE id=?').get(clip.id).display_order,1);
+});
+test('share and present does not reopen ended lessons or bypass tutorial ownership',async()=>{
+ const f=await cascadeFixture(),clip=await shareFixture(f,90),a={action:'cascadeClip',classId:f.classId,sessionId:f.session.id,clipId:clip.clip_id,durationSeconds:90,displayOrder:1,present:true};
+ db.sqlite.prepare('UPDATE learning_videos SET teacher_id=? WHERE id=?').run(other.id,clip.clip_id);await reject(mutateLive(db,teacher,a,f.at+1),403);db.sqlite.prepare('UPDATE learning_videos SET teacher_id=? WHERE id=?').run(teacher.id,clip.clip_id);
+ await reject(mutateLive(db,teacher,a,f.at+500000),409);assert.equal(db.sqlite.prepare('SELECT COUNT(*) n FROM clip_presentations').get().n,0);
+});
+
+test('gallery search finds a learner beyond the first page while keeping the teacher and clamps stale pages',()=>{
+ const members=[{id:'t',name:'Teacher'},...Array.from({length:600},(_,i)=>({id:'s'+i,name:'Learner '+i}))];
+ const filtered=findGalleryMembers(members,'t','  learner 599  ');assert.deepEqual(filtered.map(m=>m.id),['t','s599']);assert.equal(galleryPage(filtered,'t',583).others[0].id,'s599');assert.equal(galleryPage(filtered,'t',583).offset,0);
+ assert.deepEqual(findGalleryMembers(members,'t','','s400').map(m=>m.id),['t','s400']);assert.equal(findGalleryMembers(members,'t','unknown').length,1);assert.equal(galleryPage([],null,100).others.length,0);
 });
