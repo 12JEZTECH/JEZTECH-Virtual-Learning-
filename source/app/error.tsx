@@ -1,0 +1,2 @@
+'use client';
+export default function ErrorPage({reset}:{error:Error&{digest?:string};reset:()=>void}){return <main className="simple-signup"><section className="panel" role="alert"><h1>This page could not be opened</h1><p>The request could not finish. Retry, or open the login options to check your account.</p><div className="actions"><button onClick={reset}>Retry this page</button><a className="button-link secondary" href="/login">Open login options</a></div></section></main>}

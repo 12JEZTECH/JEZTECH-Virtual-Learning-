@@ -1,0 +1,146 @@
+[
+  {
+    "id": "primary-1-interactive",
+    "grade": 1,
+    "kind": "interactive",
+    "title": "Explore interactive lessons",
+    "url": "https://lms.kec.ac.ke/course/index.php?categoryid=75",
+    "checked": "2026-11-27"
+  },
+  {
+    "id": "primary-1-video",
+    "grade": 1,
+    "kind": "video",
+    "title": "Watch TV tutorials",
+    "url": "https://lms.kec.ac.ke/course/index.php?categoryid=76",
+    "checked": "2026-11-27"
+  },
+  {
+    "id": "primary-1-audio",
+    "grade": 1,
+    "kind": "audio",
+    "title": "Listen to radio lessons",
+    "url": "https://lms.kec.ac.ke/course/index.php?categoryid=77",
+    "checked": "2026-11-27"
+  },
+  {
+    "id": "primary-2-interactive",
+    "grade": 2,
+    "kind": "interactive",
+    "title": "Explore interactive lessons",
+    "url": "https://lms.kec.ac.ke/course/index.php?categoryid=81",
+    "checked": "2026-11-27"
+  },
+  {
+    "id": "primary-2-video",
+    "grade": 2,
+    "kind": "video",
+    "title": "Watch TV tutorials",
+    "url": "https://lms.kec.ac.ke/course/index.php?categoryid=82",
+    "checked": "2026-11-27"
+  },
+  {
+    "id": "primary-2-audio",
+    "grade": 2,
+    "kind": "audio",
+    "title": "Listen to radio lessons",
+    "url": "https://lms.kec.ac.ke/course/index.php?categoryid=84",
+    "checked": "2026-11-27"
+  },
+  {
+    "id": "primary-3-interactive",
+    "grade": 3,
+    "kind": "interactive",
+    "title": "Explore interactive lessons",
+    "url": "https://lms.kec.ac.ke/course/index.php?categoryid=318",
+    "checked": "2026-11-27"
+  },
+  {
+    "id": "primary-3-video",
+    "grade": 3,
+    "kind": "video",
+    "title": "Watch TV tutorials",
+    "url": "https://lms.kec.ac.ke/course/index.php?categoryid=147",
+    "checked": "2026-11-27"
+  },
+  {
+    "id": "primary-3-audio",
+    "grade": 3,
+    "kind": "audio",
+    "title": "Listen to radio lessons",
+    "url": "https://lms.kec.ac.ke/course/index.php?categoryid=91",
+    "checked": "2026-11-27"
+  },
+  {
+    "id": "primary-4-interactive",
+    "grade": 4,
+    "kind": "interactive",
+    "title": "Explore interactive lessons",
+    "url": "https://lms.kec.ac.ke/course/index.php?categoryid=159",
+    "checked": "2026-11-27"
+  },
+  {
+    "id": "primary-4-video",
+    "grade": 4,
+    "kind": "video",
+    "title": "Watch TV tutorials",
+    "url": "https://lms.kec.ac.ke/course/index.php?categoryid=93",
+    "checked": "2026-11-27"
+  },
+  {
+    "id": "primary-4-audio",
+    "grade": 4,
+    "kind": "audio",
+    "title": "Listen to radio lessons",
+    "url": "https://lms.kec.ac.ke/course/index.php?categoryid=149",
+    "checked": "2026-11-27"
+  },
+  {
+    "id": "primary-5-interactive",
+    "grade": 5,
+    "kind": "interactive",
+    "title": "Explore interactive lessons",
+    "url": "https://lms.kec.ac.ke/course/index.php?categoryid=475",
+    "checked": "2026-11-27"
+  },
+  {
+    "id": "primary-5-video",
+    "grade": 5,
+    "kind": "video",
+    "title": "Watch TV tutorials",
+    "url": "https://lms.kec.ac.ke/course/index.php?categoryid=95",
+    "checked": "2026-11-27"
+  },
+  {
+    "id": "primary-5-audio",
+    "grade": 5,
+    "kind": "audio",
+    "title": "Listen to radio lessons",
+    "url": "https://lms.kec.ac.ke/course/index.php?categoryid=150",
+    "checked": "2026-11-27"
+  },
+  {
+    "id": "primary-6-interactive",
+    "grade": 6,
+    "kind": "interactive",
+    "title": "Explore interactive lessons",
+    "url": "https://lms.kec.ac.ke/course/index.php?categoryid=526",
+    "checked": "2026-11-27"
+  },
+  {
+    "id": "primary-6-video",
+    "grade": 6,
+    "kind": "video",
+    "title": "Watch TV tutorials",
+    "url": "https://lms.kec.ac.ke/course/index.php?categoryid=464",
+    "checked": "2026-11-27"
+  },
+  {
+    "id": "primary-6-audio",
+    "grade": 6,
+    "kind": "audio",
+    "title": "Listen to radio lessons",
+    "url": "https://lms.kec.ac.ke/course/index.php?categoryid=152",
+    "checked": "2026-11-27"
+  }
+]

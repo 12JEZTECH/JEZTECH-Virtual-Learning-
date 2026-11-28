@@ -1,0 +1,62 @@
+[
+  {
+    "id": "kec-circuit",
+    "subject": "physics",
+    "experiment": "circuit",
+    "title": "Connecting a simple circuit",
+    "source": "https://lms.kec.ac.ke/mod/page/view.php?id=417",
+    "url": "https://lms.kec.ac.ke/pluginfile.php/1202/mod_page/content/1/Physic%20Electricity%20and%20Magnetism%20%20connectig%20simple%20circuit.mp4",
+    "guidance": "Observe how a complete circuit is connected. Use the JEZTECH low-voltage circuit model to compare open and closed circuits. Physical work must use teacher-approved low-voltage supplies.",
+    "verifiedMedia": true
+  },
+  {
+    "id": "kec-oxygen",
+    "subject": "chemistry",
+    "experiment": "general",
+    "title": "Preparation of oxygen \u00b7 teacher demonstration",
+    "source": "https://lms.kec.ac.ke/mod/page/view.php?id=420",
+    "url": "https://lms.kec.ac.ke/pluginfile.php/1208/mod_page/content/1/Chemistry%20Lesson%201B%20Preparation%20of%20oxygen.mp4",
+    "guidance": "Watch how the apparatus is arranged and observations are recorded. This is a supervised teacher demonstration. Do not attempt chemical preparation or heating independently.",
+    "verifiedMedia": true
+  },
+  {
+    "id": "kec-separation",
+    "subject": "chemistry",
+    "experiment": "general",
+    "title": "Making a separating funnel",
+    "source": "https://lms.kec.ac.ke/mod/page/view.php?id=419",
+    "url": "https://lms.kec.ac.ke/pluginfile.php/1206/mod_page/content/1/Chemistry%20Lesson%203B%20making%20separating%20funnel.mp4",
+    "guidance": "Observe the apparatus and discuss how differences in liquid properties allow separation. Teacher supervision is required for cutting, glassware and any chemical handling.",
+    "verifiedMedia": true
+  },
+  {
+    "id": "kec-specimens",
+    "subject": "biology",
+    "experiment": "general",
+    "title": "Collection of specimens \u00b7 Form 1 foundation lesson",
+    "source": "https://lms.kec.ac.ke/mod/page/view.php?id=141",
+    "url": "https://lms.kec.ac.ke/pluginfile.php/372/mod_page/content/1/Biology%20form%201%20%20introduction%20to%20biology%20collection%20of%20specimen%20lesson%20two.mp4",
+    "guidance": "A foundation resource, not a Form 3 syllabus placement. Observe without handling unknown organisms, body samples or disturbing habitats. Your teacher should choose suitable activities.",
+    "verifiedMedia": true
+  },
+  {
+    "id": "kec-mechanics1",
+    "subject": "physics",
+    "experiment": "general",
+    "title": "Mechanics \u00b7 Lesson 1A",
+    "source": "https://lms.kec.ac.ke/mod/page/view.php?id=416",
+    "url": "https://lms.kec.ac.ke/pluginfile.php/1200/mod_page/content/1/mechanic%20lesson%201A.mp4",
+    "guidance": "Watch the teacher demonstration and record the quantities measured with their units. Ask your teacher to confirm the lesson\u2019s suitability for your class and topic.",
+    "verifiedMedia": true
+  },
+  {
+    "id": "kec-mechanics2",
+    "subject": "physics",
+    "experiment": "general",
+    "title": "Mechanics \u00b7 Lesson 2A",
+    "source": "https://lms.kec.ac.ke/mod/page/view.php?id=415",
+    "url": "https://lms.kec.ac.ke/pluginfile.php/1198/mod_page/content/1/Mechanic%20Lesson%202A.mp4",
+    "guidance": "Use the demonstration to discuss observations, measurements and uncertainty. Your teacher should review topic placement before assigning this resource.",
+    "verifiedMedia": true
+  }
+]

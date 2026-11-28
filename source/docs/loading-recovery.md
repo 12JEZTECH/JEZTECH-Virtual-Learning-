@@ -1,0 +1,7 @@
+# Account loading recovery — 1 November 2026
+
+Production logs showed GET / returning HTTP 500 at 19:21 EAT (request dee88569c2e636aef93938548ad56e8a), alongside repeated GET /api/admission HTTP 403 responses from the signed-in browser. Public login worked in browser inspection. The signed-in root and portal entry points called initializeUser without handling an expected account restriction; a disabled account can therefore fail server rendering instead of showing its status. No account has been re-enabled or promoted as part of this repair.
+
+Homepage and portal entry points now render a recovery notice for expected account restrictions and temporary account lookup failures. The notice offers retry, login options and sign-out/account switching. Unexpected page failures also have a dedicated retry boundary. The student access boundary displays the server's 403 message, stops protected media and avoids routing account restrictions into a tuition renewal flow. Registration requests have a 15-second timeout and account-switch recovery links.
+
+Tests cover disabled-account recovery while keeping its disabled flag intact, unchanged authorized roles, and safe messages for database failures. Signed-in owner account state was not modified or impersonated. If a disabled-account notice appears, an existing authorized administrator must review People & access; the loading fix does not override that decision.

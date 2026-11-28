@@ -1,0 +1,17 @@
+import {reconcileScaleRoom,type ScaleConfig} from '../../live/scale-service';
+import {relaySettings,type RelayConfig} from '../../classroom/relay';
+import {z} from 'zod';
+import {PreparationAction,mutatePreparation,readPreparation} from '../../classroom/preparation';
+import {env} from 'cloudflare:workers';
+import {getChatGPTUser} from '../../chatgpt-auth';
+import {initializeUser,AppError} from '../../service';
+import {ClassroomAction,readClassroom,readSignals,mutateClassroom} from '../../classroom/service';
+export const dynamic='force-dynamic';
+async function handle(req:Request,write:boolean){try{const identity=await getChatGPTUser();if(!identity||!env.DB)throw new AppError(401,'Sign-in required');const u=await initializeUser(env.DB,identity,'jezreelch@gmail.com');
+ if(!write){const url=new URL(req.url),call=url.searchParams.get('call'),after=Number(url.searchParams.get('after')||0);
+ if(url.searchParams.has('board')){const offset=Number(url.searchParams.get('offset')||0),roomId=url.searchParams.get('room')||undefined;if(!Number.isSafeInteger(offset)||offset<0)throw new AppError(400,'Invalid roster page');const board=await readPreparation(env.DB,u,Date.now(),{roomId,offset,limit:50});const scope=u.role==='admin'?'1=1':u.role==='teacher'?'r.teacher_id=?':"EXISTS(SELECT 1 FROM admissions a WHERE a.student_id=? AND a.teacher_id=r.teacher_id AND a.status='approved')";const rooms=u.role==='student'?board.classSessions.map((s:any)=>({id:s.room_id,name:s.room_name})):(await env.DB.prepare(`SELECT r.id,r.name FROM classroom_rooms r WHERE ${scope} ${roomId?'AND r.id=?':''} ORDER BY r.created_at DESC LIMIT 100`).bind(...(u.role==='admin'?[]:[u.id]),...(roomId?[roomId]:[])).all()).results;return Response.json({...board,rooms},{headers:{'Cache-Control':'no-store'}})}
+ if(!Number.isSafeInteger(after)||after<0)throw new AppError(400,'Invalid cursor');return Response.json(call?await readSignals(env.DB,u,call,after):{...await readClassroom(env.DB,u),...await readPreparation(env.DB,u),...await relaySettings(env as unknown as RelayConfig,u.id)},{headers:{'Cache-Control':'no-store'}})}
+ if(req.headers.get('origin')!==new URL(req.url).origin||!req.headers.get('content-type')?.startsWith('application/json'))throw new AppError(403,'Same-origin JSON required');const raw=await req.text();if(raw.length>40000)throw new AppError(413,'Request too large');const parsed=z.union([ClassroomAction,PreparationAction]).parse(JSON.parse(raw));const prep=PreparationAction.safeParse(parsed);const result=prep.success?await mutatePreparation(env.DB,u,prep.data):await mutateClassroom(env.DB,u,ClassroomAction.parse(parsed));let mediaWarning='';if(prep.success&&'sessionId'in prep.data&&['endClass','leaveTeacherClass','classMuteAll','classStudentMicrophone'].includes(prep.data.action)){try{await reconcileScaleRoom(env.DB,env as unknown as ScaleConfig,prep.data.sessionId,Date.now(),undefined,true)}catch{mediaWarning='Lesson change saved, but media-server moderation is pending. Check the media service connection.'}}return Response.json({...result,...(mediaWarning?{mediaWarning}:{})},{headers:{'Cache-Control':'no-store'}});
+ }catch(e){return Response.json({error:e instanceof AppError?e.message:'Classroom request failed'},{status:e instanceof AppError?e.status:400,headers:{'Cache-Control':'no-store'}})}}
+export async function GET(req:Request){return handle(req,false)}
+export async function POST(req:Request){return handle(req,true)}

@@ -1,0 +1,9 @@
+import {env} from 'cloudflare:workers';
+import {getChatGPTUser} from '../../../chatgpt-auth';
+import {initializeUser,AppError} from '../../../service';
+import {authorizeSharedMedia} from '../../../live/service';
+import {videoRange} from '../../../virtual-lab/video-access';
+export const dynamic='force-dynamic';
+export async function GET(req:Request,{params}:{params:Promise<{id:string}>}){try{const identity=await getChatGPTUser();if(!identity||!env.DB)throw new AppError(401,'Sign in first');if(!env.BUCKET)throw new AppError(503,'Video storage unavailable');const u=await initializeUser(env.DB,identity,'jezreelch@gmail.com'),{id}=await params,p=await authorizeSharedMedia(env.DB,u,id);if(!p.url.startsWith('r2:'))throw new AppError(404,'This clip is not stored in the learning library');const key=p.url.slice(3),meta=await env.BUCKET.head(key);if(!meta)throw new AppError(404,'Video unavailable');let range;try{range=videoRange(req.headers.get('range'),meta.size)}catch{ return new Response(null,{status:416,headers:{'Content-Range':`bytes */${meta.size}`,'Cache-Control':'private, no-store'}})}
+ const obj=range.partial?await env.BUCKET.get(key,{range:{offset:range.start,length:range.end-range.start+1}}):await env.BUCKET.get(key);if(!obj)throw new AppError(404,'Clip file unavailable');return new Response(obj.body,{status:range.partial?206:200,headers:{'Content-Type':meta.httpMetadata?.contentType||'video/mp4','Content-Length':String(range.end-range.start+1),'Accept-Ranges':'bytes',...(range.partial?{'Content-Range':`bytes ${range.start}-${range.end}/${meta.size}`}:{ }),'Cache-Control':'private, no-store','X-Clip-Expires':String(p.expires_at),'X-Clip-User':u.id,'X-Content-Type-Options':'nosniff'}});
+ }catch(e){return Response.json({error:e instanceof AppError?e.message:'Clip unavailable'},{status:e instanceof AppError?e.status:500,headers:{'Cache-Control':'private, no-store'}})}}

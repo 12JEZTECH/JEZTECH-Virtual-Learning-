@@ -1,0 +1,9 @@
+{
+  "site_version": 69,
+  "source_commit": "ec5e0bcc54f3b391613d72a0965fa2e63e817530",
+  "source_directory": "source",
+  "files": 434,
+  "live_url": "https://jeztech-learning.jezreelch.chatgpt.site",
+  "contains_runtime_secrets": false,
+  "contains_learner_records": false
+}

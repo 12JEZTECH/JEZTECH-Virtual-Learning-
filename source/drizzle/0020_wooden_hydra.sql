@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX `registration_one_active_student` ON `registration_payments` (`student_id`) WHERE status IN ('pending','verified');

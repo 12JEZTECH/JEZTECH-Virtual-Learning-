@@ -1,0 +1,6 @@
+'use client';
+import {useState} from 'react';
+export default function TopicPicker({topics,value,onChange,name,label='Topic',required=true}:{topics:string[];value:string;onChange:(v:string)=>void;name?:string;label?:string;required?:boolean}){
+ const choices=[...new Set(topics)];const [custom,setCustom]=useState(!!value&&!choices.includes(value));
+ return <label>{label}<select name={custom?undefined:name} required={required&&!custom} value={custom?'__write_topic__':choices.includes(value)?value:''} onChange={e=>{const write=e.target.value==='__write_topic__';setCustom(write);onChange(write?'':e.target.value)}}><option value="">{choices.length?'Select a loaded topic':'No outline available · write your own'}</option>{choices.map(t=><option key={t} value={t}>{t}</option>)}<option value="__write_topic__">Write your own topic…</option></select>{custom&&<input name={name} required={required} maxLength={160} aria-label="Custom topic" value={value} onChange={e=>onChange(e.target.value)} placeholder="Enter your approved topic"/>}<span className="topic-load-status" role="status">{choices.length?`${choices.length} topics loaded for this class and subject.`:'No topic outline has been imported for this selection.'}</span></label>
+}

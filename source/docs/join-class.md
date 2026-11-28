@@ -1,0 +1,7 @@
+# Join class and automatic registration enrollment
+
+Teachers and admins have a Select class / Join as teacher control on Overview and Class control hub. The selector pages through authorized classes and shows live/preparing/no-open-lesson status. Joining persists teacher presence in the selected open lesson and opens its single classroom. Joining never skips preparation or starts the teaching timer. If no lesson is open, the class workspace opens so the teacher can prepare one using the existing duration, capacity and media controls.
+
+Students are enrolled immediately after administrator approval, matched to registered teacher, Grade/Form and non-exempt subjects. New teaching classes enroll already-approved matching learners. Existing learners are also backfilled when discovering classes. A teacher-removed enrollment is never restored by automatic enrollment. Registration does not fabricate online attendance, readiness or camera/microphone permission. Students select their registered class to enter the room, then use the existing lesson Join control; paid access or active orientation is still required. Pending, rejected, disabled, wrong-level and other-teacher accounts cannot gain live lesson access.
+
+No schema migration is required. Class joins use existing teaching_classes, class_sessions and class_enrollments records. Scoped server authorization uses the latest account role rather than a claimed client role. Existing lesson start/end timers, learner capacity, subject exemptions and access expiry remain authoritative.

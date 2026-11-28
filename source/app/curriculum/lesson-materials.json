@@ -1,0 +1,189 @@
+[
+  {
+    "id": "kec-material-0",
+    "level": "grade-7",
+    "subject": "mathematics",
+    "kind": "library",
+    "title": "Mathematics · grade 7 · interactive lessons",
+    "url": "https://lms.kec.ac.ke/mod/page/view.php?id=1796",
+    "checked": "2026-11-03",
+    "source": "https://lms.kec.ac.ke/course/index.php?categoryid=593",
+    "guidance": "Official Kenya Education Cloud source. Open the publisher's lesson page; content access and availability are controlled by the publisher. Teacher review is required for topic suitability."
+  },
+  {
+    "id": "kec-material-2",
+    "level": "grade-7",
+    "subject": "kiswahili",
+    "kind": "library",
+    "title": "Kiswahili · grade 7 · interactive lessons",
+    "url": "https://lms.kec.ac.ke/mod/page/view.php?id=1794",
+    "checked": "2026-11-03",
+    "source": "https://lms.kec.ac.ke/course/index.php?categoryid=593",
+    "guidance": "Official Kenya Education Cloud source. Open the publisher's lesson page; content access and availability are controlled by the publisher. Teacher review is required for topic suitability."
+  },
+  {
+    "id": "kec-material-3",
+    "level": "grade-7",
+    "subject": "ire",
+    "kind": "library",
+    "title": "Islamic Religious Education · grade 7 · interactive lessons",
+    "url": "https://lms.kec.ac.ke/mod/page/view.php?id=1793",
+    "checked": "2026-11-03",
+    "source": "https://lms.kec.ac.ke/course/index.php?categoryid=593",
+    "guidance": "Official Kenya Education Cloud source. Open the publisher's lesson page; content access and availability are controlled by the publisher. Teacher review is required for topic suitability."
+  },
+  {
+    "id": "kec-material-4",
+    "level": "grade-7",
+    "subject": "english",
+    "kind": "library",
+    "title": "English · grade 7 · interactive lessons",
+    "url": "https://lms.kec.ac.ke/mod/page/view.php?id=1792",
+    "checked": "2026-11-03",
+    "source": "https://lms.kec.ac.ke/course/index.php?categoryid=593",
+    "guidance": "Official Kenya Education Cloud source. Open the publisher's lesson page; content access and availability are controlled by the publisher. Teacher review is required for topic suitability."
+  },
+  {
+    "id": "kec-material-5",
+    "level": "grade-7",
+    "subject": "cre",
+    "kind": "library",
+    "title": "Christian Religious Education · grade 7 · interactive lessons",
+    "url": "https://lms.kec.ac.ke/mod/page/view.php?id=1791",
+    "checked": "2026-11-03",
+    "source": "https://lms.kec.ac.ke/course/index.php?categoryid=593",
+    "guidance": "Official Kenya Education Cloud source. Open the publisher's lesson page; content access and availability are controlled by the publisher. Teacher review is required for topic suitability."
+  },
+  {
+    "id": "kec-material-6",
+    "level": "grade-7",
+    "subject": "pre-technical",
+    "kind": "library",
+    "title": "Pre-technical studies · grade 7 · interactive lessons",
+    "url": "https://lms.kec.ac.ke/mod/page/view.php?id=1790",
+    "checked": "2026-11-03",
+    "source": "https://lms.kec.ac.ke/course/index.php?categoryid=593",
+    "guidance": "Official Kenya Education Cloud source. Open the publisher's lesson page; content access and availability are controlled by the publisher. Teacher review is required for topic suitability."
+  },
+  {
+    "id": "kec-material-7",
+    "level": "grade-7",
+    "subject": "agriculture",
+    "kind": "library",
+    "title": "Agriculture · grade 7 · interactive lessons",
+    "url": "https://lms.kec.ac.ke/mod/page/view.php?id=1789",
+    "checked": "2026-11-03",
+    "source": "https://lms.kec.ac.ke/course/index.php?categoryid=593",
+    "guidance": "Official Kenya Education Cloud source. Open the publisher's lesson page; content access and availability are controlled by the publisher. Teacher review is required for topic suitability."
+  },
+  {
+    "id": "kec-material-8",
+    "level": "grade-7",
+    "subject": "creative-arts",
+    "kind": "library",
+    "title": "Creative Arts and Sports · grade 7 · interactive lessons",
+    "url": "https://lms.kec.ac.ke/mod/page/view.php?id=2060",
+    "checked": "2026-11-03",
+    "source": "https://lms.kec.ac.ke/course/index.php?categoryid=593",
+    "guidance": "Official Kenya Education Cloud source. Open the publisher's lesson page; content access and availability are controlled by the publisher. Teacher review is required for topic suitability."
+  },
+  {
+    "id": "kec-material-9",
+    "level": "grade-7",
+    "subject": "mathematics",
+    "kind": "audio",
+    "title": "Mathematics · grade 7 · radio lessons",
+    "url": "https://lms.kec.ac.ke/course/index.php?categoryid=543",
+    "checked": "2026-11-03",
+    "source": "https://lms.kec.ac.ke/course/index.php?categoryid=154",
+    "guidance": "Official Kenya Education Cloud source. Open the publisher's lesson page; content access and availability are controlled by the publisher. Teacher review is required for topic suitability."
+  },
+  {
+    "id": "kec-material-10",
+    "level": "grade-7",
+    "subject": "kiswahili",
+    "kind": "audio",
+    "title": "Kiswahili · grade 7 · radio lessons",
+    "url": "https://lms.kec.ac.ke/course/index.php?categoryid=501",
+    "checked": "2026-11-03",
+    "source": "https://lms.kec.ac.ke/course/index.php?categoryid=154",
+    "guidance": "Official Kenya Education Cloud source. Open the publisher's lesson page; content access and availability are controlled by the publisher. Teacher review is required for topic suitability."
+  },
+  {
+    "id": "kec-material-11",
+    "level": "grade-7",
+    "subject": "english",
+    "kind": "audio",
+    "title": "English · grade 7 · radio lessons",
+    "url": "https://lms.kec.ac.ke/course/index.php?categoryid=500",
+    "checked": "2026-11-03",
+    "source": "https://lms.kec.ac.ke/course/index.php?categoryid=154",
+    "guidance": "Official Kenya Education Cloud source. Open the publisher's lesson page; content access and availability are controlled by the publisher. Teacher review is required for topic suitability."
+  },
+  {
+    "id": "kec-material-12",
+    "level": "grade-7",
+    "subject": "cre",
+    "kind": "audio",
+    "title": "Christian Religious Education · grade 7 · radio lessons",
+    "url": "https://lms.kec.ac.ke/course/index.php?categoryid=499",
+    "checked": "2026-11-03",
+    "source": "https://lms.kec.ac.ke/course/index.php?categoryid=154",
+    "guidance": "Official Kenya Education Cloud source. Open the publisher's lesson page; content access and availability are controlled by the publisher. Teacher review is required for topic suitability."
+  },
+  {
+    "id": "kec-material-13",
+    "level": "grade-7",
+    "subject": "general",
+    "kind": "audio",
+    "title": "Integrated Science · grade 7 · radio lessons",
+    "url": "https://lms.kec.ac.ke/course/index.php?categoryid=544",
+    "checked": "2026-11-03",
+    "source": "https://lms.kec.ac.ke/course/index.php?categoryid=154",
+    "guidance": "Official Kenya Education Cloud source. Open the publisher's lesson page; content access and availability are controlled by the publisher. Teacher review is required for topic suitability."
+  },
+  {
+    "id": "kec-material-14",
+    "level": "grade-7",
+    "subject": "social-studies",
+    "kind": "audio",
+    "title": "Social Studies · grade 7 · radio lessons",
+    "url": "https://lms.kec.ac.ke/course/index.php?categoryid=545",
+    "checked": "2026-11-03",
+    "source": "https://lms.kec.ac.ke/course/index.php?categoryid=154",
+    "guidance": "Official Kenya Education Cloud source. Open the publisher's lesson page; content access and availability are controlled by the publisher. Teacher review is required for topic suitability."
+  },
+  {
+    "id": "kec-material-16",
+    "level": "grade-9",
+    "subject": "english",
+    "kind": "video",
+    "title": "English · grade 9 · TV lessons",
+    "url": "https://lms.kec.ac.ke/course/index.php?categoryid=655",
+    "checked": "2026-11-03",
+    "source": "https://lms.kec.ac.ke/course/index.php?categoryid=654",
+    "guidance": "Official Kenya Education Cloud source. Open the publisher's lesson page; content access and availability are controlled by the publisher. Teacher review is required for topic suitability."
+  },
+  {
+    "id": "kec-material-17",
+    "level": "grade-9",
+    "subject": "mathematics",
+    "kind": "video",
+    "title": "Mathematics · grade 9 · TV lessons",
+    "url": "https://lms.kec.ac.ke/course/index.php?categoryid=658",
+    "checked": "2026-11-03",
+    "source": "https://lms.kec.ac.ke/course/index.php?categoryid=654",
+    "guidance": "Official Kenya Education Cloud source. Open the publisher's lesson page; content access and availability are controlled by the publisher. Teacher review is required for topic suitability."
+  },
+  {
+    "id": "kec-material-18",
+    "level": "grade-9",
+    "subject": "kiswahili",
+    "kind": "video",
+    "title": "Kiswahili · grade 9 · TV lessons",
+    "url": "https://lms.kec.ac.ke/course/index.php?categoryid=659",
+    "checked": "2026-11-03",
+    "source": "https://lms.kec.ac.ke/course/index.php?categoryid=654",
+    "guidance": "Official Kenya Education Cloud source. Open the publisher's lesson page; content access and availability are controlled by the publisher. Teacher review is required for topic suitability."
+  }
+]

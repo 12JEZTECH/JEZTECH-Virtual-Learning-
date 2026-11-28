@@ -1,0 +1,35 @@
+[
+  {
+    "id": "ai-circuit",
+    "title": "AI-assisted model: open and closed circuits",
+    "experiment": "circuit",
+    "explanation": "Original AI-assisted animation with on-screen captions. A complete conducting path allows current in this simplified low-voltage model. With 6 V across 100 ohms, I = V/R = 0.06 A (60 mA). Observe the switch, then compare voltage and resistance in the virtual workbench. Teacher review required; this is not recorded laboratory footage. No mains electricity.",
+    "duration": 32,
+    "generated": true,
+    "teacher_id": "system",
+    "teacher_name": "JEZTECH · AI-assisted teaching model",
+    "created_at": 1792339200000
+  },
+  {
+    "id": "ai-magnification",
+    "title": "AI-assisted model: microscope magnification",
+    "experiment": "microscope",
+    "explanation": "Original AI-assisted diagram animation with on-screen captions. Total magnification equals eyepiece magnification multiplied by objective magnification. A 10x eyepiece and 4x objective give 40x; a 10x objective gives 100x. Increasing magnification shows a smaller field of view in this schematic. The cell drawings are illustrative, not calibrated microscopy images. Teacher review required.",
+    "duration": 32,
+    "generated": true,
+    "teacher_id": "system",
+    "teacher_name": "JEZTECH · AI-assisted teaching model",
+    "created_at": 1792339200000
+  },
+  {
+    "id": "ai-speed",
+    "title": "AI-assisted model: measuring average speed",
+    "experiment": "general",
+    "explanation": "Original AI-assisted measurement animation with on-screen captions. A model object covers 20 m in 5 s, so average speed is total distance divided by total time: 4 m/s. Average speed does not describe every instant of a journey. Record units and discuss timing uncertainty in real measurements. Teacher review required; the animation is a model rather than experimental evidence.",
+    "duration": 32,
+    "generated": true,
+    "teacher_id": "system",
+    "teacher_name": "JEZTECH · AI-assisted teaching model",
+    "created_at": 1792339200000
+  }
+]
