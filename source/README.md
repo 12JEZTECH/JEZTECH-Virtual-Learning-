@@ -230,3 +230,7 @@ Teachers now have a paged board of every online learner, a searchable server-med
 ### Protected clip links
 
 Every uploaded clip in the Learning video studio now has a permanent `/clips/<id>` link. The authenticated `/clips` entry opens the signed-in user's video library. Use **Copy all clip links** or **Download link list** to export the entire accessible library. Links never expose R2 keys or playback leases, and opening one does not reserve video credit; learners explicitly choose Watch linked clip. Existing admission, teaching-group, entitlement and playback checks remain in force.
+
+### Schools and school administration
+
+Use `/schools` to register a school as its administrator, obtain platform-admin approval, invite verified accounts with school-specific roles and manage the school's classes, enrolments, lesson notes, discussions and automatically marked assignments. School membership never grants global administrator access. Existing individual-learning, payments and live-media records stay in their original portal. See `docs/school-tenancy.md` for the supported school workspace, isolation model and module boundaries.

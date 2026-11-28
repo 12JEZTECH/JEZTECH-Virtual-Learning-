@@ -21,3 +21,7 @@ See `source/README.md` for application features and development guidance.
 ## Render entry address
 
 The free static Render entry is https://jeztech-learning-portal.onrender.com . It opens the existing JEZTECH Site and keeps its login and data. `/clips/` opens the authenticated clip library. Every uploaded clip in the library has a protected link; copy or download all accessible links from Learning videos.
+
+## School workspaces
+
+School registration and login: https://jeztech-learning-portal.onrender.com/schools/ . School registration is pending platform-admin approval. School administrators invite verified-email members and manage school-scoped classes, enrolments, lessons, discussion and automatically marked assignments. Roles and composite database keys keep school data separate. Existing individual learning, live-media and global payment modules remain in their original portal; see `source/docs/school-tenancy.md` for module boundaries.

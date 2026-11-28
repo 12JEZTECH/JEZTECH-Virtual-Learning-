@@ -11,6 +11,7 @@ import "./live/live.css";
 import "./polish.css";
 import "./learner-ui.css";
 import "./school/school.css";
+import "./schools/schools.css";
 
 export const viewport: Viewport = {width:"device-width",initialScale:1,viewportFit:"cover",themeColor:"#15392e"};
 

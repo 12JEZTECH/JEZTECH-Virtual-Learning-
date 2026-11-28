@@ -1,0 +1,17 @@
+# School registration and isolated school workspaces
+
+Open `/schools` (or the school registration / school admin login link on the welcome page) using your verified ChatGPT sign-in. Enter your school's name, contact phone and optional registration number. Your account becomes that school's pending administrator. It does not become a platform administrator.
+
+The existing platform administrator opens `/schools`, reviews the registration and approves it. An approved school administrator can invite additional administrators, teachers and learners using their verified sign-in emails. Copy and share the generated invitation link. The recipient signs in with that exact email and accepts. Invitations expire after seven days and can be revoked before acceptance. Existing school membership must be restored explicitly; an invitation cannot silently overwrite its role.
+
+School administrators create classes, assign active school teachers, allocate active school learners and remove or restore membership. Teachers see only their assigned classes; learners see only classes they are enrolled in. A person may belong to several schools with a different role in each. School suspension denies subsequent school API access. Disabling or deleting the global identity denies every school. Removing membership in one school preserves membership and records in another.
+
+The school workspace supports primary/junior/senior/Form 3–4 subject selection, teacher-prepared notes and authorised HTTPS tutorial/resource links, timed lesson start/end, class discussions and multiple-choice assignments marked on the server. Learners do not receive answer keys. Submission scores are computed from stored teacher questions and cannot be overwritten by client-supplied marks. Staff see results for their authorised class; learners see only their own. Member/class/enrolment lists are paged in groups of 50.
+
+School roles live in `school_members`, separately from `users.role`. No school role authorises JEZTECH's original platform-admin, global payment, user-management or legacy classroom endpoints. Every school read/write checks the canonical active identity, the selected school's status, membership role and class access. Child academic records carry a school ID and use composite foreign keys to prevent cross-school references. Changes to school access, lessons and assignments create school-scoped audit records.
+
+## Existing data and module boundaries
+
+Migration `0046_school_tenants.sql` adds ten new tables. It does not move, delete, reassign or copy existing JEZTECH learner, payment, clip, exam, live-media or classroom records. Those existing individual-learning features retain their original access controls and portal. New school workspaces use their own member, class, lesson, discussion and assignment records. Existing LiveKit broadcasts, fee collection, purchased clip entitlements and ExamGuard examinations have not been converted into school-scoped modules by this change; school admins are not given a shortcut into those global tools.
+
+No school registrations, invited users, payments or financial agreements were fabricated for deployment. School status approval currently controls access; this update does not invent a school subscription rate or automatically collect a fee. The existing `/school` classroom station remains available to its previously authorised teachers/admins. The new `/schools` workspace is deliberately separate.

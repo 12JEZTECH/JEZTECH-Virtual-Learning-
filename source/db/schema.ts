@@ -1,5 +1,5 @@
 import {sql} from 'drizzle-orm';
-import { sqliteTable, text, integer, index, uniqueIndex, primaryKey } from 'drizzle-orm/sqlite-core';
+import { sqliteTable, text, integer, index, uniqueIndex, primaryKey, foreignKey } from 'drizzle-orm/sqlite-core';
 export const users = sqliteTable('users', {
   id: text('id').primaryKey(), email: text('email').notNull(), name: text('name').notNull(),
   role: text('role', {enum:['admin','teacher','student']}).notNull().default('student'),
@@ -291,3 +291,35 @@ export const timedAccessWindows=sqliteTable('timed_access_windows',{
 export const timedAccessMembers=sqliteTable('timed_access_members',{
  windowId:text('window_id').notNull().references(()=>timedAccessWindows.id),studentId:text('student_id').notNull().references(()=>users.id),
 },t=>[primaryKey({columns:[t.windowId,t.studentId]}),index('timed_access_student').on(t.studentId,t.windowId)]);
+
+// School tenancy is separate from platform roles. Composite keys prevent cross-school references.
+export const schoolTenants=sqliteTable('school_tenants',{
+ id:text('id').primaryKey(),name:text('name').notNull(),code:text('code').notNull().unique(),registrationNumber:text('registration_number').notNull().default(''),phone:text('phone').notNull().default(''),ownerId:text('owner_id').notNull().references(()=>users.id),status:text('status').notNull().default('pending'),reviewNote:text('review_note').notNull().default(''),reviewedBy:text('reviewed_by').references(()=>users.id),reviewedAt:integer('reviewed_at'),createdAt:integer('created_at').notNull(),
+},t=>[index('schools_owner').on(t.ownerId,t.createdAt)]);
+export const schoolMembers=sqliteTable('school_members',{
+ schoolId:text('school_id').notNull().references(()=>schoolTenants.id),userId:text('user_id').notNull().references(()=>users.id),role:text('role').notNull(),status:text('status').notNull(),joinedAt:integer('joined_at').notNull(),
+},t=>[primaryKey({columns:[t.schoolId,t.userId]}),index('school_member_user').on(t.userId,t.status,t.schoolId)]);
+export const schoolInvites=sqliteTable('school_invites',{
+ id:text('id').primaryKey(),schoolId:text('school_id').notNull().references(()=>schoolTenants.id),email:text('email').notNull(),role:text('role').notNull(),createdBy:text('created_by').notNull().references(()=>users.id),createdAt:integer('created_at').notNull(),expiresAt:integer('expires_at').notNull(),acceptedBy:text('accepted_by').references(()=>users.id),acceptedAt:integer('accepted_at'),revokedAt:integer('revoked_at'),
+},t=>[index('school_invite_email').on(t.email,t.schoolId,t.expiresAt)]);
+export const schoolClasses=sqliteTable('school_classes',{
+ id:text('id').primaryKey(),schoolId:text('school_id').notNull().references(()=>schoolTenants.id),name:text('name').notNull(),classLevel:text('class_level').notNull(),subject:text('subject').notNull(),teacherId:text('teacher_id').notNull(),createdAt:integer('created_at').notNull(),
+},t=>[uniqueIndex('school_class_id').on(t.schoolId,t.id),index('school_class_scope').on(t.schoolId,t.teacherId,t.createdAt),foreignKey({columns:[t.schoolId,t.teacherId],foreignColumns:[schoolMembers.schoolId,schoolMembers.userId]})]);
+export const schoolEnrolments=sqliteTable('school_enrolments',{
+ schoolId:text('school_id').notNull(),classId:text('class_id').notNull(),studentId:text('student_id').notNull(),status:text('status').notNull(),createdAt:integer('created_at').notNull(),
+},t=>[primaryKey({columns:[t.schoolId,t.classId,t.studentId]}),index('school_student_class').on(t.schoolId,t.studentId,t.status),foreignKey({columns:[t.schoolId,t.classId],foreignColumns:[schoolClasses.schoolId,schoolClasses.id]}),foreignKey({columns:[t.schoolId,t.studentId],foreignColumns:[schoolMembers.schoolId,schoolMembers.userId]})]);
+export const schoolLessons=sqliteTable('school_lessons',{
+ id:text('id').primaryKey(),schoolId:text('school_id').notNull(),classId:text('class_id').notNull(),createdBy:text('created_by').notNull().references(()=>users.id),title:text('title').notNull(),notes:text('notes').notNull().default(''),resourceUrl:text('resource_url').notNull().default(''),status:text('status').notNull(),durationMinutes:integer('duration_minutes').notNull(),startedAt:integer('started_at'),endsAt:integer('ends_at'),createdAt:integer('created_at').notNull(),
+},t=>[index('school_lesson_scope').on(t.schoolId,t.classId,t.createdAt),uniqueIndex('school_one_live_lesson').on(t.schoolId,t.classId).where(sql`${t.status}='live'`),foreignKey({columns:[t.schoolId,t.classId],foreignColumns:[schoolClasses.schoolId,schoolClasses.id]})]);
+export const schoolPosts=sqliteTable('school_posts',{
+ id:text('id').primaryKey(),schoolId:text('school_id').notNull(),classId:text('class_id').notNull(),userId:text('user_id').notNull().references(()=>users.id),body:text('body').notNull(),createdAt:integer('created_at').notNull(),
+},t=>[index('school_post_scope').on(t.schoolId,t.classId,t.createdAt),foreignKey({columns:[t.schoolId,t.classId],foreignColumns:[schoolClasses.schoolId,schoolClasses.id]})]);
+export const schoolAssignments=sqliteTable('school_assignments',{
+ id:text('id').primaryKey(),schoolId:text('school_id').notNull(),classId:text('class_id').notNull(),createdBy:text('created_by').notNull().references(()=>users.id),title:text('title').notNull(),questions:text('questions').notNull(),status:text('status').notNull(),createdAt:integer('created_at').notNull(),
+},t=>[uniqueIndex('school_assignment_id').on(t.schoolId,t.id),index('school_assignment_scope').on(t.schoolId,t.classId,t.createdAt),foreignKey({columns:[t.schoolId,t.classId],foreignColumns:[schoolClasses.schoolId,schoolClasses.id]})]);
+export const schoolSubmissions=sqliteTable('school_submissions',{
+ schoolId:text('school_id').notNull(),assignmentId:text('assignment_id').notNull(),studentId:text('student_id').notNull(),answers:text('answers').notNull(),score:integer('score').notNull(),total:integer('total').notNull(),submittedAt:integer('submitted_at').notNull(),
+},t=>[primaryKey({columns:[t.schoolId,t.assignmentId,t.studentId]}),foreignKey({columns:[t.schoolId,t.assignmentId],foreignColumns:[schoolAssignments.schoolId,schoolAssignments.id]}),foreignKey({columns:[t.schoolId,t.studentId],foreignColumns:[schoolMembers.schoolId,schoolMembers.userId]})]);
+export const schoolAudit=sqliteTable('school_audit',{
+ id:text('id').primaryKey(),schoolId:text('school_id').notNull().references(()=>schoolTenants.id),actorId:text('actor_id').notNull().references(()=>users.id),action:text('action').notNull(),targetId:text('target_id').notNull(),createdAt:integer('created_at').notNull(),
+},t=>[index('school_audit_scope').on(t.schoolId,t.createdAt)]);

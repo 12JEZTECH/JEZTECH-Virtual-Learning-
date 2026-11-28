@@ -323,6 +323,13 @@
       "when": 1795785882868,
       "tag": "0045_timed_student_access",
       "breakpoints": true
+    },
+    {
+      "idx": 46,
+      "version": "6",
+      "when": 1795861622628,
+      "tag": "0046_school_tenants",
+      "breakpoints": true
     }
   ]
 }
